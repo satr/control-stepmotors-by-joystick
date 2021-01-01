@@ -1,25 +1,28 @@
 /*
-Drive stepper motors with 28BYJ-48 by driver ULN2003A
-Control by two joysticks
+Drive two stepmotors with 28BYJ-48 by ESP32 via ULN2003A
+Control by joystick HW-504
+MIT License
+https://github.com/satr/control-stepmotors-by-joystick/blob/main/LICENSE
 Copyright © 2021, github.com/satr
+https://github.com/satr/control-stepmotors-by-joystick
 */
 
 #include <Arduino.h>
 #include <AccelStepper.h>
 
-#define STEPPER_FULL_TURN_STEPS 2038
-#define STEPPER_MAX_SPEED 500
-#define STEPPER_ACCELERATION 200
-
 #define JOYSTICK_X_PIN 32
 #define JOYSTICK_Y_PIN 33
 #define JOYSTICK_MAX_VAL 4095
 
+#define STEPPER_FULL_TURN_STEPS 2038
+#define STEPPER_MAX_SPEED 500
+#define STEPPER_ACCELERATION 200
+//Stepmotor X
 #define STEPPER_X_PIN_IN1 4
 #define STEPPER_X_PIN_IN2 16
 #define STEPPER_X_PIN_IN3 17
 #define STEPPER_X_PIN_IN4 5
-
+//Stepmotor Y
 #define STEPPER_Y_PIN_IN1 18
 #define STEPPER_Y_PIN_IN2 19
 #define STEPPER_Y_PIN_IN3 23
@@ -27,8 +30,8 @@ Copyright © 2021, github.com/satr
 
 #define VAL_THRESHOLD 100
 
-AccelStepper stepperY(AccelStepper::FULL4WIRE, STEPPER_Y_PIN_IN1, STEPPER_Y_PIN_IN3, STEPPER_Y_PIN_IN2, STEPPER_Y_PIN_IN4); 
 AccelStepper stepperX(AccelStepper::FULL4WIRE, STEPPER_X_PIN_IN1, STEPPER_X_PIN_IN3, STEPPER_X_PIN_IN2, STEPPER_X_PIN_IN4);
+AccelStepper stepperY(AccelStepper::FULL4WIRE, STEPPER_Y_PIN_IN1, STEPPER_Y_PIN_IN3, STEPPER_Y_PIN_IN2, STEPPER_Y_PIN_IN4); 
 
 int targetX = 0;
 int targetY = 0;
